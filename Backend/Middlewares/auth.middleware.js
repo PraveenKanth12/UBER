@@ -2,14 +2,17 @@ const userModel=require('../Models/user.model');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const captainModel = require('../Models/captain.model');
+const blacklistTokenModel = require('../Models/blacklistToken.model');
 
 module.exports.authUser=async(req,res,next)=>{
-  const token=req.cookies.token || req.authorization?.split(' ')[1];
+  const token=req.
+  
+  cookies.token || req.headers.authorization?.split(' ')[1];
 
   if(!token){
     req.status(401).json({message:"Unauthorized"});
   }
-  const blacklisted=await userModel.findOne({token:token})
+  const blacklisted=await blacklistTokenModel.findOne({token:token})
   if(blacklisted){
     res.status(401).json({message:"Unauthorized"});
   }
@@ -26,12 +29,12 @@ module.exports.authUser=async(req,res,next)=>{
 }
 
 module.exports.authCaptain=async(req,res,next)=>{
-  const token=req.cookies.token || req.authorization?.split(' ')[1];
+  const token=req.cookies.token || req.headers.authorization?.split(' ')[1];
 
   if(!token){
     req.status(401).json({message:"Unauthorized"});
   }
-  const blacklisted=await captainModel.findOne({token:token})
+  const blacklisted=await blacklistTokenModel.findOne({token:token})
   if(blacklisted){
     res.status(401).json({message:"Unauthorized"});
   }

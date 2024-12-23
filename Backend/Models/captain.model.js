@@ -40,7 +40,7 @@ const captainSchema=new mongoose.Schema({
       required:true,
       minlength:[2,"Color should be atleast 2 character length"]
     },
-    numberplate:{
+    numberPlate:{
       type:String,
       required:true,
       minlength:[3,"Numberplate should be atleast 3 character long"]
